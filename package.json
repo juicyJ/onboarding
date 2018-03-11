@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dependencies": "cd client && npm install && cd .. && cd server && npm install && cd ..",
+    "dependencies": "npm install && cd client && npm install && cd .. && cd server && npm install && cd ..",
     "server": "node server/app.js",
     "client": "cd client && npm start && cd ..",
     "start": "concurrently \"npm run server\" \"npm run client\""
