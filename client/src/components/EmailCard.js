@@ -38,4 +38,4 @@ export default class EmailCard extends Component {
       </div>
     );
   }
-}
+};

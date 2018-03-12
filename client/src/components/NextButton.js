@@ -13,10 +13,6 @@ export default class NextButton extends Component {
     this.showNextButton = this.showNextButton.bind(this);
   }
 
-  handleSubmit() {
-
-  }
-
   showNextButton(index, isDisabled) {
     if (index > 4) { // this is # of cards...hardcoded sux
       return null;
@@ -44,4 +40,4 @@ export default class NextButton extends Component {
       </div>
     );
   }
-}
+};

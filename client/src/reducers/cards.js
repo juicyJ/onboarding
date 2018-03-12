@@ -2,7 +2,8 @@ import {
   INCREMENT_CARD_IDX,
   DECREMENT_CARD_IDX,
   SET_CARD_ANSWER
-} from '../actions/cards'
+} from '../actions/cards';
+
 export default function(state = {index: 0, answers: {}}, action) {
   switch (action.type) {
     case INCREMENT_CARD_IDX: {
@@ -29,4 +30,4 @@ export default function(state = {index: 0, answers: {}}, action) {
     default: 
       return state;
   }
-}
+};

@@ -4,12 +4,12 @@ export const SET_CARD_ANSWER = 'SET_CARD_ANSWER';
 
 export function incrementCardIdx() {
   return { type: INCREMENT_CARD_IDX };
-}
+};
 
 export function decrementCardIdx() {
   return { type: DECREMENT_CARD_IDX };
-}
+};
 
 export function setCardAnswer(idx, answer) {
   return { type: SET_CARD_ANSWER, idx: idx, answer: answer};
-}
+};

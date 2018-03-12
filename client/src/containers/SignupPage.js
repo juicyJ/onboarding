@@ -53,7 +53,7 @@ class SignupPage extends Component {
         return (<SignupCard index={index}
                   firstName={firstName}
                   answer={answer}
-                />);
+                  />);
       default:
         return <div>default</div>;
     }
