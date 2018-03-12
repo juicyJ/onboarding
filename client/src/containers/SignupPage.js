@@ -103,7 +103,7 @@ const mapStateToProps = (state) => {
     answers: state.cards.answers,
     index: state.cards.index,
     estimatedSavings: state.cards.estimated_savings
-  }
+  };
 }
 
 const mapDispatchToProps = (dispatch) => {

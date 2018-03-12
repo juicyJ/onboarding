@@ -20,7 +20,8 @@ export default class SignupCard extends Component {
       first_name: answers[0].first_name,
       last_name: answers[0].last_name,
       email: answers[1].email,
-      bank: answers[2].bank
+      bank: answers[2].bank,
+      coolEncryptedPasswordd: event.target.value
     };
 
     fetch('/api/users', {
@@ -48,7 +49,7 @@ export default class SignupCard extends Component {
         </div>
         <div><input id="password" placeholder="Set Password" type="password"/></div>
         <div><input id="confirm_password" placeholder="Confirm Password" type="password"/></div>
-        <button onClick={() => this.process(answers)}>Create </button>
+        <button onClick={(e) => this.process(answers, e)}>Create </button>
 
       </div>
     );

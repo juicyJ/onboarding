@@ -31,7 +31,7 @@ export default class NameCard extends Component {
     return (
       <div>
         <div>
-          What's your name?
+          What is your name?
         </div>
         <div>
           <form>

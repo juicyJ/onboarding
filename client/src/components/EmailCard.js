@@ -16,11 +16,10 @@ export default class EmailCard extends Component {
     this.props.setCardAnswer(index, {
       [id]: value
     });
-    
   }
 
   render() {
-    const {index, firstName, answer } = this.props;
+    const { index, firstName, answer } = this.props;
     const email = answer.email || "";
     const isDisabled = !email;
     return (
