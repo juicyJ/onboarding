@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { incrementCardIdx, decrementCardIdx, setCardAnswer } from '../actions/cards';
 import NameCard from '../components/NameCard';
+import EmailCard from '../components/EmailCard';
+import OverdraftCard from '../components/OverdraftCard';
+import SignupCard from '../components/SignupCard';
 import './SignupPage.css';
 
 class SignupPage extends Component {
@@ -19,14 +22,37 @@ class SignupPage extends Component {
     decrementCardIdx: PropTypes.func
   };
 
-  determineCard(index) {
-    const answer = this.props.answers[index] || {};
+  determineCard(index, answers) {
+    const answer = answers[index] || {};
+    let firstName;
     switch(index) {
       case 0:
         return (<NameCard index={index} 
                   incrementCardIdx={this.props.incrementCardIdx}
                   answer={answer} 
                   setCardAnswer={this.props.setCardAnswer}
+                />);
+      case 1:
+        firstName = answers[0].first_name;
+        return (<EmailCard index={index} 
+                  firstName={firstName} 
+                  answer={answer}
+                  incrementCardIdx={this.props.incrementCardIdx}
+                  setCardAnswer={this.props.setCardAnswer}
+                />);
+      case 2:
+          firstName = answers[0].first_name;
+          return (<OverdraftCard index={index}
+                    firstName={firstName}
+                    answer={answer}
+                    incrementCardIdx={this.props.incrementCardIdx}
+                    setCardAnswer={this.props.setCardAnswer}
+                 />);
+      case 3:
+        firstName = answers[0].first_name; 
+        return (<SignupCard index={index}
+                  firstName={firstName}
+                  answer={answer}
                 />);
       default:
         return <div>default</div>;
@@ -53,7 +79,7 @@ class SignupPage extends Component {
           <h1> Signup Page </h1>
         </div>
         <div className="cardBody">
-          {this.determineCard(index)}
+          {this.determineCard(index, answers)}
         </div>
         <div className="backBtn">
           {this.showBackButton(index)}

@@ -5,7 +5,7 @@ export default class NextButton extends Component {
   static propTypes = {
     index: PropTypes.number,
     incrementCardIdx: PropTypes.func,
-    isDisabled: PropTypes.boolean
+    isDisabled: PropTypes.bool
   };
   
   constructor(props) {
