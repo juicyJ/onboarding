@@ -20,7 +20,7 @@ export default function(state = {index: 0, answers: {}}, action) {
     case SET_CARD_ANSWER: {
       const stateAnswers = state.answers;
       const nextStateAnswers = Object.assign({}, stateAnswers, {
-        [action.idx]: action.answer
+        [action.idx]: Object.assign({}, stateAnswers[action.idx], action.answer)
       });
       return Object.assign({}, state, {
         answers: nextStateAnswers

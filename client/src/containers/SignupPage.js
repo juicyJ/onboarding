@@ -9,7 +9,7 @@ class SignupPage extends Component {
   constructor(props) {
     super(props);
     this.showBackButton = this.showBackButton.bind(this);
-    this.showNextButton = this.showNextButton.bind(this);
+    this.determineCard = this.determineCard.bind(this);
   }
 
   static propTypes = {
@@ -17,13 +17,17 @@ class SignupPage extends Component {
     index: PropTypes.number,
     incrementCardIdx: PropTypes.func,
     decrementCardIdx: PropTypes.func
-    
   };
 
   determineCard(index) {
+    const answer = this.props.answers[index] || {};
     switch(index) {
       case 0:
-        return <NameCard/>;
+        return (<NameCard index={index} 
+                  incrementCardIdx={this.props.incrementCardIdx}
+                  answer={answer} 
+                  setCardAnswer={this.props.setCardAnswer}
+                />);
       default:
         return <div>default</div>;
     }
@@ -41,19 +45,6 @@ class SignupPage extends Component {
     }
   }
 
-  showNextButton(index) {
-    if (index > 4) { // this is # of cards...hardcoded sux
-      return null;
-    } else {
-      return (
-        <a href="#" onClick={() => this.props.incrementCardIdx()}>
-          Next
-        </a>
-      );
-    }
-  }
-
-
   render() {
     const { index, answers } = this.props;
     return (
@@ -66,9 +57,6 @@ class SignupPage extends Component {
         </div>
         <div className="backBtn">
           {this.showBackButton(index)}
-        </div>
-        <div className="nextBtn">
-          {this.showNextButton(index)}
         </div>
       </div>
     );
