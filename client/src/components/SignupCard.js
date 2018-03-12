@@ -5,11 +5,13 @@ import PropTypes from 'prop-types';
 export default class SignupCard extends Component {
   constructor(props) {
     super(props);
+    this.process = this.process.bind(this);
   }
 
   static propTypes = {
     firstName: PropTypes.string,
     answers: PropTypes.object,
+    incrementCardIdx: PropTypes.func,
     estimatedSavings: PropTypes.number
   };
 
@@ -29,6 +31,7 @@ export default class SignupCard extends Component {
       return resp.json();
     })
     .then((data) => {
+      this.props.incrementCardIdx();
       //do some redirect to a  /logged-in page with the plaid link
     });
 

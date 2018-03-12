@@ -6,6 +6,7 @@ import NameCard from '../components/NameCard';
 import EmailCard from '../components/EmailCard';
 import OverdraftCard from '../components/OverdraftCard';
 import SignupCard from '../components/SignupCard';
+import SuccessCard from '../components/SuccessCard';
 import './SignupPage.css';
 
 class SignupPage extends Component {
@@ -56,16 +57,19 @@ class SignupPage extends Component {
         firstName = answers[0].first_name; 
         return (<SignupCard index={index}
                   firstName={firstName}
+                  incrementCardIdx={this.props.incrementCardIdx}
                   answers={answers}
                   estimatedSavings={estimatedSavings}
                   />);
+      case 4:
+        return (<SuccessCard/>);
       default:
         return <div>default</div>;
     }
   }
 
   showBackButton(index) {
-    if (index < 1) {
+    if (index < 1 || index === 4) {
       return null;
     } else {
       return (
