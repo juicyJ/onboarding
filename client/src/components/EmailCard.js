@@ -3,10 +3,6 @@ import NextButton from './NextButton';
 import PropTypes from 'prop-types';
 
 export default class EmailCard extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   static propTypes = {
     index: PropTypes.number,
     firstName: PropTypes.string,
@@ -20,6 +16,7 @@ export default class EmailCard extends Component {
     this.props.setCardAnswer(index, {
       [id]: value
     });
+    
   }
 
   render() {

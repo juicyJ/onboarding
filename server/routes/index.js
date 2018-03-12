@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* POST create user */
-router.post('/user', function(req, res, next) {
+router.post('/api/users', function(req, res, next) {
   // fake logic to create user
   // req.password is prob plain text whoopsies
   // something along the lines of...models.User.create({})....
@@ -22,7 +22,7 @@ router.post('/user', function(req, res, next) {
   });
 });
 
-router.get('/estimate_savings', function(req, res, next) {
+router.get('/api/estimate_savings', function(req, res, next) {
   //hit some helper to calculate estimated savings with bridgit given rough params
   res.json({
     estimated_savings: 400

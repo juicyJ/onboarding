@@ -3,15 +3,13 @@ import NextButton from './NextButton';
 import PropTypes from 'prop-types';
 
 export default class OverdraftCard extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   static propTypes = {
     index: PropTypes.number,
     firstName: PropTypes.string,
     answer: PropTypes.object,
-    incrementCardIdx: PropTypes.func
+    incrementCardIdx: PropTypes.func,
+    setCardAnswer: PropTypes.func,
+    setEstimatedSavings: PropTypes.func
   };
 
   handleChange(index, event) {
@@ -20,6 +18,17 @@ export default class OverdraftCard extends Component {
     this.props.setCardAnswer(index, {
       [id]: value
     });
+
+    if (id === 'bank' && value) {
+      fetch('/api/estimate_savings')
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((data) => {
+        const amount = data.estimated_savings;
+        this.props.setEstimatedSavings(amount);
+      });
+    }
   }
 
   showBankQuestion(index, answer) {

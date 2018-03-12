@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { incrementCardIdx, decrementCardIdx, setCardAnswer } from '../actions/cards';
+import { incrementCardIdx, decrementCardIdx, setCardAnswer, setEstimatedSavings } from '../actions/cards';
 import NameCard from '../components/NameCard';
 import EmailCard from '../components/EmailCard';
 import OverdraftCard from '../components/OverdraftCard';
@@ -18,11 +18,14 @@ class SignupPage extends Component {
   static propTypes = {
     answers: PropTypes.object,
     index: PropTypes.number,
+    estimatedSavings: PropTypes.number,
     incrementCardIdx: PropTypes.func,
-    decrementCardIdx: PropTypes.func
+    decrementCardIdx: PropTypes.func,
+    setCardAnswer: PropTypes.func,
+    setEstimatedSavings: PropTypes.func
   };
 
-  determineCard(index, answers) {
+  determineCard(index, answers, estimatedSavings) {
     const answer = answers[index] || {};
     let firstName;
     switch(index) {
@@ -47,12 +50,14 @@ class SignupPage extends Component {
                     answer={answer}
                     incrementCardIdx={this.props.incrementCardIdx}
                     setCardAnswer={this.props.setCardAnswer}
+                    setEstimatedSavings={this.props.setEstimatedSavings}
                  />);
       case 3:
         firstName = answers[0].first_name; 
         return (<SignupCard index={index}
                   firstName={firstName}
-                  answer={answer}
+                  answers={answers}
+                  estimatedSavings={estimatedSavings}
                   />);
       default:
         return <div>default</div>;
@@ -72,14 +77,14 @@ class SignupPage extends Component {
   }
 
   render() {
-    const { index, answers } = this.props;
+    const { index, answers, estimatedSavings } = this.props;
     return (
       <div className="SignupPage">
         <div className="title">
           <h1> Signup Page </h1>
         </div>
         <div className="cardBody">
-          {this.determineCard(index, answers)}
+          {this.determineCard(index, answers, estimatedSavings)}
         </div>
         <div className="backBtn">
           {this.showBackButton(index)}
@@ -92,7 +97,8 @@ class SignupPage extends Component {
 const mapStateToProps = (state) => {
   return {
     answers: state.cards.answers,
-    index: state.cards.index
+    index: state.cards.index,
+    estimatedSavings: state.cards.estimated_savings
   }
 }
 
@@ -106,6 +112,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setCardAnswer: (index, answer) => {
       dispatch(setCardAnswer(index, answer));
+    },
+    setEstimatedSavings: (amount) => {
+      dispatch(setEstimatedSavings(amount));
     }
   };
 }

@@ -8,28 +8,45 @@ export default class SignupCard extends Component {
   }
 
   static propTypes = {
-    index: PropTypes.number,
     firstName: PropTypes.string,
-    answer: PropTypes.object,
-    incrementCardIdx: PropTypes.func
+    answers: PropTypes.object,
+    estimatedSavings: PropTypes.number
   };
 
+  process(answers, event) {
+    const body = {
+      first_name: answers[0].first_name,
+      last_name: answers[0].last_name,
+      email: answers[1].email,
+      bank: answers[2].bank
+    };
+
+    fetch('/api/users', {
+      method: 'POST',
+      body: JSON.stringify(body)
+    })
+    .then((resp) => {
+      return resp.json();
+    })
+    .then((data) => {
+      //do some redirect to a  /logged-in page with the plaid link
+    });
+
+  }
   render() {
-    const {index, firstName, answer } = this.props;
-    const email = answer.email || "";
-    const isDisabled = !email;
+    const {firstName, answers, estimatedSavings } = this.props;
     return (
       <div>
         <div>
-          {firstName}, you could have saved $400 or more using Bridgit last year.
+          {firstName}, you could have saved ${estimatedSavings} or more using Bridgit last year.
         </div>
         <div>
           Enter a password to signup, connect a bank later, and start saving money! 
         </div>
-        <form>
-            <div><input id="password" placeholder="Set Password" type="password" value={null}/></div>
-            <div><input id="confirm_password" placeholder="Confirm Password" type="password" value={null}/></div>
-        </form>
+        <div><input id="password" placeholder="Set Password" type="password"/></div>
+        <div><input id="confirm_password" placeholder="Confirm Password" type="password"/></div>
+        <button onClick={() => this.process(answers)}>Create </button>
+
       </div>
     );
   }
